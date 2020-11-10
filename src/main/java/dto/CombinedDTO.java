@@ -54,5 +54,39 @@ public class CombinedDTO {
     public void setDadRef(String dadRef) {
         this.dadRef = dadRef;
     }
+
+    public String getCatFact() {
+        return catFact;
+    }
+
+    public void setCatFact(String catFact) {
+        this.catFact = catFact;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    
     
 }
