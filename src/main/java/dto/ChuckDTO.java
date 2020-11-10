@@ -6,9 +6,7 @@ public class ChuckDTO {
     private String value;
 
 
-    public ChuckDTO(String value) {
-        this.value = value;
-
+    public ChuckDTO() {
     }
 
     public String getValue() {

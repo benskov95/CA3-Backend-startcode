@@ -17,7 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
-import fetchers.jokeFetcher;
+import fetchers.ExampleFetcher;
 import utils.HttpUtils;
 
 /**
@@ -37,7 +37,7 @@ public class JokeResource {
     @RolesAllowed({"user", "admin"})
     public String getJokes() throws IOException, InterruptedException, ExecutionException, TimeoutException {
 
-        String jokes = jokeFetcher.fetchedJokes(es,gson);
+        String jokes = ExampleFetcher.fetchJokes(es,gson);
 
         return jokes;
     }

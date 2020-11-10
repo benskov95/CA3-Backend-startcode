@@ -1,19 +1,23 @@
 package fetchers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
+import dto.YesNoDTO;
+import java.io.IOException;
 import utils.HttpUtils;
 
 import java.util.concurrent.*;
 
-public class jokeFetcher {
+public class ExampleFetcher {
 
     private static String chuckURL = "https://api.chucknorris.io/jokes/random";
     private static String dadURL = "https://icanhazdadjoke.com";
+    private static String yesNoURL = "https://yesno.wtf/api";
 
-    public static String fetchedJokes (ExecutorService threadPool, Gson gson) throws InterruptedException, ExecutionException, TimeoutException {
+    public static String fetchJokes (ExecutorService threadPool, Gson gson) throws InterruptedException, ExecutionException, TimeoutException, IOException {
 
 
         Callable<ChuckDTO> chuckTask = new Callable<ChuckDTO>() {
@@ -45,5 +49,12 @@ public class jokeFetcher {
         String combinedJson = gson.toJson(combinedDTO);
 
         return combinedJson;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        String x = HttpUtils.fetchData(yesNoURL);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        YesNoDTO test = gson.fromJson(x, YesNoDTO.class);
+        System.out.println(test.getImage());
     }
 }
