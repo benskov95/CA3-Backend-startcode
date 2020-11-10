@@ -107,7 +107,7 @@ public class UserResourceTest {
 
     @Test
     public void testServerIsUp() {
-        given().when().get("/count").then().statusCode(200);
+        given().when().get("users/count").then().statusCode(200);
     }
 
 

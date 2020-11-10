@@ -1,0 +1,17 @@
+* [33m107fdea[m[33m ([m[1;36mHEAD -> [m[1;32mdeleteUsers[m[33m)[m added deleteuser to userfacade
+* [33m7b64a6a[m[33m ([m[1;31morigin/getAllUsers[m[33m, [m[1;31morigin/dev[m[33m, [m[1;32mgetAllUsers[m[33m, [m[1;32mdev[m[33m)[m minor
+* [33mdb82362[m added getallusers test to restTest
+* [33m7e9459d[m added test to GetAllUsers facade
+* [33me8fa693[m added getAllusers to userfacade + rest endpoint
+* [33m42e1e8e[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m, [m[1;32mfetcher[m[33m)[m fetcher working
+* [33m2ffb0c9[m added jokeFetcher
+* [33m771c420[m[33m ([m[1;31morigin/fetcher[m[33m)[m Update README.md
+* [33me6bbe53[m adde comment to test travis
+* [33me0545fd[m trying to get travis to work
+* [33m6bab0cc[m added comment on connection string
+* [33m89ce551[m only build when we push to master
+* [33mf94e3a3[m ready for travis
+* [33mc8ff2ff[m test igen
+* [33m43d4276[m tester gitignore
+* [33m4515104[m test
+* [33m0c908a1[m first
