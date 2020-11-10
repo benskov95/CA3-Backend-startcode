@@ -16,11 +16,6 @@ public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Basic(optional = false)
-  @Column(name = "user_id")
-  private int id;
-
   @Basic(optional = false)
   @NotNull
   @Column(name = "user_name", length = 25)
@@ -32,7 +27,7 @@ public class User implements Serializable {
   @Column(name = "user_pass")
   private String userPass;
   @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
+    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany (cascade = CascadeType.PERSIST)
   private List<Role> roleList = new ArrayList<>();

@@ -15,6 +15,7 @@ import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 
 import org.junit.jupiter.api.AfterAll;
@@ -28,7 +29,9 @@ public class UserResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-
+   private static User user = new User("user", "test123");
+    private static   User admin = new User("admin", "test123");
+    private static   User both = new User("user_admin", "test123");
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -104,7 +107,7 @@ public class UserResourceTest {
 
     @Test
     public void testServerIsUp() {
-        given().when().get("/xxx").then().statusCode(200);
+        given().when().get("/count").then().statusCode(200);
     }
 
 
@@ -121,5 +124,20 @@ public class UserResourceTest {
                 .body("userName", hasItem("user"))
                 .and()
                 .body("userName", hasItem("admin"));
+    }
+    @Test
+    public void testDeleteUser(){
+        String userName = user.getUserName();
+        login("admin", "test123");
+        given()
+                .contentType("application/json")
+                .header("x-access-token", securityToken)
+                .delete("/users/{userName}", userName)
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .body("userName", equalTo("user"));
+
     }
 }

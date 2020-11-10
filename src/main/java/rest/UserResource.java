@@ -36,10 +36,11 @@ public class UserResource {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("{userName}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String deletePerson(@PathParam("id") int id)  {
-        UserDTO userDTO = USER_FACADE.deleteUser(id);
+    @RolesAllowed("admin")
+    public String deletePerson(@PathParam("userName") String userName)  {
+        UserDTO userDTO = USER_FACADE.deleteUser(userName);
 
         return GSON.toJson(userDTO);
     }

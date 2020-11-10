@@ -24,6 +24,9 @@ public class UserFacadeTest {
 
     private static EntityManagerFactory emf;
     private static UserFacade facade;
+    private static User user = new User("user", "test123");
+    private static   User admin = new User("admin", "test123");
+    private static   User both = new User("user_admin", "test123");
 
     public UserFacadeTest() {
     }
@@ -44,9 +47,7 @@ public class UserFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        User user = new User("user", "test123");
-        User admin = new User("admin", "test123");
-        User both = new User("user_admin", "test123");
+
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Roles.deleteAllRows").executeUpdate();
@@ -80,6 +81,15 @@ public class UserFacadeTest {
         List<UserDTO> userDTOList = facade.getAllUsers();
 
         assertTrue(userDTOList.size() == 3);
+    }
+
+    @Test
+    public void testDeleteUser(){
+        String userName = user.getUserName();
+
+        UserDTO userDTO = facade.deleteUser(userName);
+
+        assertTrue(userDTO.getUserName().equals(userName));
     }
 
 }

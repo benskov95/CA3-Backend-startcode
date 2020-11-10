@@ -39,13 +39,13 @@ public class UserFacade {
         return instance;
     }
 
-    public UserDTO deleteUser(int id) {
+    public UserDTO deleteUser(String userName) {
 
         EntityManager em = emf.createEntityManager();
 
         try{
             em.getTransaction().begin();
-            User user = em.find(User.class, id);
+            User user = em.find(User.class, userName);
             em.remove(user);
             em.getTransaction().commit();
 
