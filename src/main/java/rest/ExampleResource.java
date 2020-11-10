@@ -21,11 +21,11 @@ public class ExampleResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed({"user", "admin"})
-    public String getJokes() throws IOException, InterruptedException, ExecutionException, TimeoutException {
+    public String getData() throws IOException, InterruptedException, ExecutionException, TimeoutException {
 
-        String jokes = ExampleFetcher.fetchJokes(es,gson);
+        String data = ExampleFetcher.fetchData(es,gson);
 
-        return jokes;
+        return data;
     }
 
    

@@ -6,11 +6,11 @@ dist: bionic
 
 language: java
 
- safelist
+
  branches:
    only:
    - master
-   - stable
+
 
 cache:
   directories:  

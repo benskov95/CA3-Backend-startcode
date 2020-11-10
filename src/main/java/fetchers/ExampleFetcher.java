@@ -21,7 +21,7 @@ public class ExampleFetcher {
     private static String kanyeURL = "https://api.kanye.rest/";
     private static String yesNoURL = "https://yesno.wtf/api";
 
-    public static String fetchJokes(ExecutorService threadPool, Gson gson) throws InterruptedException, ExecutionException, TimeoutException, IOException {
+    public static String fetchData(ExecutorService threadPool, Gson gson) throws InterruptedException, ExecutionException, TimeoutException, IOException {
 
         Callable<ChuckDTO> chuckTask = new Callable<ChuckDTO>() {
             @Override
