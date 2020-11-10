@@ -2,9 +2,11 @@ package fetchers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CatFactDTO;
 import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
+import dto.KanyeDTO;
 import dto.YesNoDTO;
 import java.io.IOException;
 import utils.HttpUtils;
@@ -16,6 +18,8 @@ public class ExampleFetcher {
     private static String chuckURL = "https://api.chucknorris.io/jokes/random";
     private static String dadURL = "https://icanhazdadjoke.com";
     private static String yesNoURL = "https://yesno.wtf/api";
+    private static String catFactURL = "https://meowfacts.herokuapp.com/";
+    private static String kanyeURL = "https://api.kanye.rest/";
 
     public static String fetchJokes (ExecutorService threadPool, Gson gson) throws InterruptedException, ExecutionException, TimeoutException, IOException {
 
@@ -52,9 +56,9 @@ public class ExampleFetcher {
     }
     
     public static void main(String[] args) throws IOException {
-        String x = HttpUtils.fetchData(yesNoURL);
+        String x = HttpUtils.fetchData(kanyeURL);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        YesNoDTO test = gson.fromJson(x, YesNoDTO.class);
-        System.out.println(test.getImage());
+        KanyeDTO test = gson.fromJson(x, KanyeDTO.class);
+        System.out.println(test.getQuote());
     }
 }
