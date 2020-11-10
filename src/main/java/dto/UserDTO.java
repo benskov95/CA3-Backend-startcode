@@ -9,11 +9,24 @@ public class UserDTO {
 
     private String userName;
     private List<String> roles;
+    private String password;
+
 
     public UserDTO(User user) {
         this.userName = user.getUserName();
         this.roles = user.getRolesAsStrings();
     }
+
+    public UserDTO(){}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public String getUserName() {
         return userName;
