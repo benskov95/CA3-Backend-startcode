@@ -44,7 +44,7 @@ public class UserFacadeTest {
     }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
-   
+
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
