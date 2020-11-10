@@ -6,12 +6,20 @@ public class CombinedDTO {
     private String chuckRef;
     private String dadJoke;
     private String dadRef;
+    private String catFact;
+    private String quote;
+    private String answer;
+    private String image;
 
-    public CombinedDTO(ChuckDTO chuckDTO, DadDTO dadDTO) {
+    public CombinedDTO(ChuckDTO chuckDTO, DadDTO dadDTO, CatFactDTO catDTO, KanyeDTO kanyeDTO, YesNoDTO yesDTO) {
         this.chuckJoke = chuckDTO.getValue();
         this.chuckRef = "https://api.chucknorris.io/jokes/random";
         this.dadJoke = dadDTO.getJoke();
         this.dadRef = "https://icanhazdadjoke.com";
+        this.catFact = catDTO.getData().get(0);
+        this.quote = kanyeDTO.getQuote();
+        this.answer = yesDTO.getAnswer();
+        this.image = yesDTO.getImage();
 
     }
 

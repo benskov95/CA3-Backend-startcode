@@ -25,8 +25,8 @@ import utils.HttpUtils;
  *
  * @author lam
  */
-@Path("jokes")
-public class JokeResource {
+@Path("example")
+public class ExampleResource {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static ExecutorService es = Executors.newCachedThreadPool();
