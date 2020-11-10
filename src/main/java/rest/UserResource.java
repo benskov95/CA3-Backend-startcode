@@ -23,13 +23,20 @@ public class UserResource {
     public static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
             
 
-
     @GET
     @Path("count")
     @Produces({MediaType.APPLICATION_JSON})
     public String getNumberOfUsers() {
         int numberOfUsers = USER_FACADE.getAllUsers().size();
         return "{\"count\":" + numberOfUsers + "}";
+    }
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String addUser(String user){
+        UserDTO userDTO = GSON.fromJson(user, UserDTO.class);
+        UserDTO newUser = USER_FACADE.addUser(userDTO);
+        return GSON.toJson(newUser);
     }
     
     @GET

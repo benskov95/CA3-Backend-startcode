@@ -1,6 +1,7 @@
 package facades;
 
 import dto.UserDTO;
+import entities.Role;
 import entities.User;
 
 import javax.enterprise.inject.Typed;
@@ -58,7 +59,7 @@ public class UserFacade {
 
     }
 
-    public User getVeryfiedUser(String username, String password) throws AuthenticationException {
+    public User getVerifiedUser(String username, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         User user;
         try {
@@ -90,6 +91,30 @@ public class UserFacade {
         }finally {
             em.close();
         }
+
+    }
+
+    public UserDTO addUser (UserDTO userDTO){
+
+        EntityManager em = emf.createEntityManager();
+        User user = new User(userDTO.getUserName(), userDTO.getPassword());
+        checkRole(user, em);
+        try{
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            return new UserDTO(user);
+
+        }finally {
+            em.close();
+        }
+    }
+
+    public void checkRole(User user, EntityManager em){
+
+        Query query = em.createQuery("SELECT r FROM Role r WHERE r.roleName =:role ");
+        query.setParameter("role", "user");
+        user.addRole((Role) query.getSingleResult());
 
     }
 
