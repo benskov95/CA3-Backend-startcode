@@ -1,10 +1,12 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
 import java.io.IOException;
+import java.util.concurrent.*;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -14,6 +16,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+
+import fetchers.jokeFetcher;
 import utils.HttpUtils;
 
 /**
@@ -24,26 +28,18 @@ import utils.HttpUtils;
 @Path("jokes")
 public class JokeResource {
 
-    @Context
-    private UriInfo context;
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static ExecutorService es = Executors.newCachedThreadPool();
 
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"user", "admin"}) 
-    public String getJokes() throws IOException {
-        Gson gson = new Gson();
-        String chuck = HttpUtils.fetchData("https://api.chucknorris.io/jokes/random");
-        String dad = HttpUtils.fetchData("https://icanhazdadjoke.com");
-        
-        ChuckDTO chuckDTO = gson.fromJson(chuck, ChuckDTO.class);
-        DadDTO dadDTO = gson.fromJson(dad, DadDTO.class);
-        dadDTO.addUrl();
-        
-        CombinedDTO combinedDTO = new CombinedDTO(chuckDTO, dadDTO);
-        String combined = gson.toJson(combinedDTO);
-        
-        return combined;
+    @RolesAllowed({"user", "admin"})
+    public String getJokes() throws IOException, InterruptedException, ExecutionException, TimeoutException {
+
+        String jokes = jokeFetcher.fetchedJokes(es,gson);
+
+        return jokes;
     }
 
    

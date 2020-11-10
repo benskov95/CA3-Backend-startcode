@@ -4,11 +4,11 @@ package dto;
 public class ChuckDTO {
     
     private String value;
-    private String url;
 
-    public ChuckDTO(String value, String url) {
+
+    public ChuckDTO(String value) {
         this.value = value;
-        this.url = url;
+
     }
 
     public String getValue() {
@@ -19,12 +19,7 @@ public class ChuckDTO {
         this.value = value;
     }
 
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+
     
 }

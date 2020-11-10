@@ -9,9 +9,10 @@ public class CombinedDTO {
 
     public CombinedDTO(ChuckDTO chuckDTO, DadDTO dadDTO) {
         this.chuckJoke = chuckDTO.getValue();
-        this.chuckRef = chuckDTO.getUrl();
+        this.chuckRef = "https://api.chucknorris.io/jokes/random";
         this.dadJoke = dadDTO.getJoke();
-        this.dadRef = dadDTO.getUrl();
+        this.dadRef = "https://icanhazdadjoke.com";
+
     }
 
     public String getChuckJoke() {
