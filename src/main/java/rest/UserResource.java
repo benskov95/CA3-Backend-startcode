@@ -9,9 +9,7 @@ import facades.FacadeExample;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -42,4 +40,16 @@ public class UserResource {
         return GSON.toJson(dtoList);
 
     }
+
+    @DELETE
+    @Path("{userName}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed("admin")
+    public String deletePerson(@PathParam("userName") String userName)  {
+        UserDTO userDTO = USER_FACADE.deleteUser(userName);
+
+        return GSON.toJson(userDTO);
+    }
+
+
 }

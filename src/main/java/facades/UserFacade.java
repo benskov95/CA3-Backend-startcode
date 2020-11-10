@@ -39,6 +39,25 @@ public class UserFacade {
         return instance;
     }
 
+    public UserDTO deleteUser(String userName) {
+
+        EntityManager em = emf.createEntityManager();
+
+        try{
+            em.getTransaction().begin();
+            User user = em.find(User.class, userName);
+            em.remove(user);
+            em.getTransaction().commit();
+
+            return new UserDTO(user);
+
+        }finally {
+            em.close();
+        }
+
+
+    }
+
     public User getVeryfiedUser(String username, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         User user;

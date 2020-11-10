@@ -20,6 +20,7 @@ public class User implements Serializable {
   @NotNull
   @Column(name = "user_name", length = 25)
   private String userName;
+
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 255)
