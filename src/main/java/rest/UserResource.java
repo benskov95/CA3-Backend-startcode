@@ -27,7 +27,7 @@ public class UserResource {
 
 
     @GET
- //   @RolesAllowed("admin")
+    @RolesAllowed("admin")
     @Produces({MediaType.APPLICATION_JSON})
     public String getUsers() {
 

@@ -91,6 +91,18 @@ public class UserResourceTest {
             em.close();
         }
     }
+    private static String securityToken;
+    private static void login(String role, String password) {
+        String json = String.format("{username: \"%s\", password: \"%s\"}", role, password);
+        securityToken = given()
+                .contentType("application/json")
+                .body(json)
+                //.when().post("/api/login")
+                .when().post("/login")
+                .then()
+                .extract().path("token");
+        //System.out.println("TOKEN ---> " + securityToken);
+    }
 
     @Test
     public void testServerIsUp() {
@@ -101,8 +113,10 @@ public class UserResourceTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
+        login("admin", "test123");
         given()
                 .contentType("application/json")
+                .header("x-access-token", securityToken)
                 .get("/users").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
