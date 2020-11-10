@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -78,6 +78,7 @@ public class User implements Serializable {
   }
 
   public List<Role> getRoleList() {
+
     return roleList;
   }
 
