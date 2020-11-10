@@ -5,9 +5,7 @@ public class DadDTO {
     private String joke;
     private String url;
 
-    public DadDTO(String joke) {
-        this.joke = joke;
-        this.url = "https://icanhazdadjoke.com";
+    public DadDTO() {
     }
 
     public String getJoke() {

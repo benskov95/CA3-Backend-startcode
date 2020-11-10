@@ -25,12 +25,18 @@ public class UserResource {
 
 
     @GET
+    @Path("count")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getNumberOfUsers() {
+        int numberOfUsers = USER_FACADE.getAllUsers().size();
+        return "{\"count\":" + numberOfUsers + "}";
+    }
+    
+    @GET
     @RolesAllowed("admin")
     @Produces({MediaType.APPLICATION_JSON})
     public String getUsers() {
-
         List<UserDTO> dtoList = USER_FACADE.getAllUsers();
-
         return GSON.toJson(dtoList);
 
     }
