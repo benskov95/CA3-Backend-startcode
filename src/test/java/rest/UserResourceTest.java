@@ -1,5 +1,6 @@
 package rest;
 
+import dto.UserDTO;
 import entities.Role;
 import entities.User;
 import utils.EMF_Creator;
@@ -144,5 +145,22 @@ public class UserResourceTest {
                 .and()
                 .body("username", equalTo("user"));
 
+    }
+
+    @Test
+    public void testAddUser(){
+        User newUser = new User("test", "test");
+        UserDTO newUserDTO = new UserDTO(newUser);
+
+        given()
+                .contentType("application/json")
+                .body(newUserDTO)
+                .when()
+                .post("/users/")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .body("username", equalTo("test"));
     }
 }
