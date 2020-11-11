@@ -4,15 +4,14 @@ import dto.UserDTO;
 import entities.Role;
 import entities.User;
 
-import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import errorhandling.NotFoundException;
 import security.errorhandling.AuthenticationException;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,11 +93,12 @@ public class UserFacade {
 
     }
 
-    public UserDTO addUser (UserDTO userDTO){
+    public UserDTO addUser (UserDTO userDTO) throws NotFoundException {
 
         EntityManager em = emf.createEntityManager();
-        User user = new User(userDTO.getUserName(), userDTO.getPassword());
+        User user = new User(userDTO.getUsername(), userDTO.getPassword());
         checkRole(user, em);
+        checkIfExists(user, em);
         try{
             em.getTransaction().begin();
             em.persist(user);
@@ -110,6 +110,18 @@ public class UserFacade {
         }
     }
 
+    private void checkIfExists(User user, EntityManager em) throws NotFoundException {
+
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.username =:username ");
+        query.setParameter("username", user.getUsername());
+
+        List<User> result = query.getResultList();
+
+        if (result.size() >= 1){
+            throw new NotFoundException("User already exists");
+        }
+    }
+
     public void checkRole(User user, EntityManager em){
 
         Query query = em.createQuery("SELECT r FROM Role r WHERE r.roleName =:role ");
@@ -117,5 +129,6 @@ public class UserFacade {
         user.addRole((Role) query.getSingleResult());
 
     }
+
 
 }

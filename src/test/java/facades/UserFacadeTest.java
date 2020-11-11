@@ -88,11 +88,11 @@ public class UserFacadeTest {
 
     @Test
     public void testDeleteUser() {
-        String userName = user.getUserName();
+        String userName = user.getUsername();
 
         UserDTO userDTO = facade.deleteUser(userName);
 
-        assertTrue(userDTO.getUserName().equals(userName));
+        assertTrue(userDTO.getUsername().equals(userName));
     }
 
 }

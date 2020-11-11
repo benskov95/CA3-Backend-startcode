@@ -1,19 +1,18 @@
 package dto;
 
-import entities.Role;
 import entities.User;
 
 import java.util.List;
 
 public class UserDTO {
 
-    private String userName;
+    private String username;
     private List<String> roles;
     private String password;
 
 
     public UserDTO(User user) {
-        this.userName = user.getUserName();
+        this.username = user.getUsername();
         this.roles = user.getRolesAsStrings();
     }
 
@@ -28,12 +27,12 @@ public class UserDTO {
     }
 
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<String> getRoles() {

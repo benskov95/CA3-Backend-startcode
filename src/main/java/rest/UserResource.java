@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.UserDTO;
+import errorhandling.NotFoundException;
 import facades.UserFacade;
 import utils.EMF_Creator;
 import facades.FacadeExample;
@@ -33,7 +34,7 @@ public class UserResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String addUser(String user){
+    public String addUser(String user) throws NotFoundException {
         UserDTO userDTO = GSON.fromJson(user, UserDTO.class);
         UserDTO newUser = USER_FACADE.addUser(userDTO);
         return GSON.toJson(newUser);
