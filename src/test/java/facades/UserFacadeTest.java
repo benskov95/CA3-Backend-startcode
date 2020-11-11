@@ -3,6 +3,7 @@ package facades;
 import dto.UserDTO;
 import entities.Role;
 import entities.User;
+import security.errorhandling.AuthenticationException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -93,6 +94,19 @@ public class UserFacadeTest {
         UserDTO userDTO = facade.deleteUser(userName);
 
         assertTrue(userDTO.getUsername().equals(userName));
+    }
+
+    @Test
+    public void testAddUser() throws AuthenticationException {
+        User newUser = new User("Test", "Testtest");
+        UserDTO userDTO = facade.addUser(new UserDTO(newUser));
+
+        List<UserDTO> userDTOList = facade.getAllUsers();
+
+        assertTrue(userDTOList.size() == 4);
+
+        assertTrue(userDTO.getUsername().equals(newUser.getUsername()));
+
     }
 
 }
