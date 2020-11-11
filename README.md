@@ -12,6 +12,6 @@ In order to get started, you MUST change:
 Also, make sure to:
 
 - Add users to your database, either via the provided addUser endpoint - /api/users as POST request in Postman, or from the frontend startcode's register option. The backend has to be running for this to work, of course.
-- Manually change at least one user's role(s) in WorkBench to admin to have access to all endpoints.
+- Add a user with the username "admin" to get a user with the role admin to start you off. You can of course manually change user roles via WorkBench if necessary, or add more roles to one user.
 
 Once this has been done, you can freely add more entity classes, DTOs, facades etc. to start working on your own project.
