@@ -14,7 +14,6 @@ import utils.HttpUtils;
 import java.util.concurrent.*;
 
 public class ExampleFetcher {
-    //remove me
     private static String chuckURL = "https://api.chucknorris.io/jokes/random";
     private static String dadURL = "https://icanhazdadjoke.com";
     private static String catFactURL = "https://meowfacts.herokuapp.com/";
@@ -84,12 +83,5 @@ public class ExampleFetcher {
         String combinedJson = gson.toJson(combinedDTO);
 
         return combinedJson;
-    }
-
-    public static void main(String[] args) throws IOException {
-        String x = HttpUtils.fetchData(kanyeURL);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        KanyeDTO test = gson.fromJson(x, KanyeDTO.class);
-        System.out.println(test.getQuote());
     }
 }
