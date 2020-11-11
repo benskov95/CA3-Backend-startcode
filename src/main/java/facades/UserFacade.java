@@ -85,6 +85,7 @@ public class UserFacade {
 
         EntityManager em = emf.createEntityManager();
         User user = new User(userDTO.getUsername(), userDTO.getPassword());
+        addInitialRoles(em);
         checkRole(user, em);
         checkIfExists(user, em);
         try{
@@ -110,12 +111,25 @@ public class UserFacade {
     }
 
     public void checkRole(User user, EntityManager em){
-
+        String param;
+        if (user.getUsername().equals("admin")) {
+            param = "admin";
+        } else {
+            param = "user";
+        }
         Query query = em.createQuery("SELECT r FROM Role r WHERE r.roleName =:role ");
-        query.setParameter("role", "user");
+        query.setParameter("role", param);
         user.addRole((Role) query.getSingleResult());
-
     }
-
-
+    
+    public void addInitialRoles(EntityManager em) {
+        Query query = em.createQuery("SELECT r FROM Role r");
+        if (query.getResultList().isEmpty()) {
+            em.getTransaction().begin();
+            em.persist(new Role("user"));
+            em.persist(new Role("admin"));
+            em.getTransaction().commit();
+        }
+    }
+    
 }
