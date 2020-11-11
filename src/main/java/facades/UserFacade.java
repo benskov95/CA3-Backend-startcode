@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import errorhandling.ExceptionDTO;
 import errorhandling.NotFoundException;
 import security.errorhandling.AuthenticationException;
 
@@ -93,7 +94,7 @@ public class UserFacade {
 
     }
 
-    public UserDTO addUser (UserDTO userDTO) throws NotFoundException {
+    public UserDTO addUser (UserDTO userDTO) throws  AuthenticationException {
 
         EntityManager em = emf.createEntityManager();
         User user = new User(userDTO.getUsername(), userDTO.getPassword());
@@ -110,15 +111,14 @@ public class UserFacade {
         }
     }
 
-    private void checkIfExists(User user, EntityManager em) throws NotFoundException {
+    private void checkIfExists(User user, EntityManager em) throws AuthenticationException {
 
         Query query = em.createQuery("SELECT u FROM User u WHERE u.username =:username ");
         query.setParameter("username", user.getUsername());
 
-        List<User> result = query.getResultList();
-
-        if (result.size() >= 1){
-            throw new NotFoundException("User already exists");
+       List<User> result = query.getResultList();
+        if(result.size() > 0){
+            throw new AuthenticationException("A user with this username already exists!");
         }
     }
 
