@@ -1,5 +1,6 @@
 package rest;
 
+import dto.UserDTO;
 import entities.Role;
 import entities.User;
 import utils.EMF_Creator;
@@ -125,24 +126,41 @@ public class UserResourceTest {
                 .get("/users").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("userName", hasItem("user"))
+                .body("username", hasItem("user"))
                 .and()
-                .body("userName", hasItem("admin"));
+                .body("username", hasItem("admin"));
     }
 
     @Test
     public void testDeleteUser() {
-        String userName = user.getUserName();
+        String username = user.getUsername();
         login("admin", "test123");
         given()
                 .contentType("application/json")
                 .header("x-access-token", securityToken)
-                .delete("/users/{userName}", userName)
+                .delete("/users/{username}", username)
                 .then()
                 .assertThat()
                 .statusCode(200)
                 .and()
-                .body("userName", equalTo("user"));
+                .body("username", equalTo("user"));
 
+    }
+
+    @Test
+    public void testAddUser(){
+        User newUser = new User("test", "test");
+        UserDTO newUserDTO = new UserDTO(newUser);
+
+        given()
+                .contentType("application/json")
+                .body(newUserDTO)
+                .when()
+                .post("/users/")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .body("username", equalTo("test"));
     }
 }

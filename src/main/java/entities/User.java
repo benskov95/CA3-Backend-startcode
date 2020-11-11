@@ -19,7 +19,7 @@ public class User implements Serializable {
   @Basic(optional = false)
   @NotNull
   @Column(name = "user_name", length = 25)
-  private String userName;
+  private String username;
 
   @Basic(optional = false)
   @NotNull
@@ -50,18 +50,18 @@ public class User implements Serializable {
        return(matches);
     }
 
-  public User(String userName, String userPass) {
-    this.userName = userName;
+  public User(String username, String userPass) {
+    this.username = username;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt(12));
   }
 
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String userName) {
+    this.username = userName;
   }
 
   public String getUserPass() {
