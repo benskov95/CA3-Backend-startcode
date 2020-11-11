@@ -3,22 +3,14 @@ package facades;
 import dto.UserDTO;
 import entities.Role;
 import entities.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
-import errorhandling.ExceptionDTO;
-import errorhandling.NotFoundException;
 import security.errorhandling.AuthenticationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lam@cphbusiness.dk
- */
 public class UserFacade {
 
     private static EntityManagerFactory emf;
@@ -27,11 +19,6 @@ public class UserFacade {
     private UserFacade() {
     }
 
-    /**
-     *
-     * @param _emf
-     * @return the instance of this facade.
-     */
     public static UserFacade getUserFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;

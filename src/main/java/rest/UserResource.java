@@ -3,11 +3,9 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.UserDTO;
-import errorhandling.NotFoundException;
 import facades.UserFacade;
 import security.errorhandling.AuthenticationException;
 import utils.EMF_Creator;
-import facades.FacadeExample;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -54,7 +52,7 @@ public class UserResource {
     @Path("{userName}")
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed("admin")
-    public String deletePerson(@PathParam("userName") String userName)  {
+    public String deletePerson(@PathParam("userName") String userName) {
         UserDTO userDTO = USER_FACADE.deleteUser(userName);
 
         return GSON.toJson(userDTO);
